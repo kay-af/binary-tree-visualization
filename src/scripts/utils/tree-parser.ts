@@ -84,7 +84,7 @@ export class TreeParser {
       if (!this.isValidInteger(token))
         throw new TreeParserError(
           "Invalid Input",
-          "Only integer values and 'N' / 'n' (Null) are supported in tree input"
+          "Tree input shall consists of either numbers or the character 'N' (Case-insensitve) signifying null."
         );
       const value = Number.parseInt(token);
 
@@ -96,7 +96,7 @@ export class TreeParser {
       )
         throw new TreeParserError(
           "Invalid Input",
-          "Only 32-bit signed integers are supported"
+          "Only 32-bit signed integers are supported."
         );
 
       return value;

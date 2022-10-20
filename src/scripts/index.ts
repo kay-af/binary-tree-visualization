@@ -60,6 +60,10 @@ export class App {
   private initialTreeInput: string;
   private state: AppState;
 
+  /**
+   * Creates a new instance of the application.
+   * @param config Application configuration to use.
+   */
   public constructor(config: AppConfig) {
     // Assign elements
     this.treeInputElement = document.getElementById(
@@ -100,6 +104,9 @@ export class App {
     };
   }
 
+  /**
+   * Initialize app by assigning appropriate listeners and reflecting the initial state.
+   */
   public initialize(): void {
     this.treeInputElement.value = this.initialTreeInput;
     this.treeInputElement.focus();
@@ -123,10 +130,17 @@ export class App {
     this.updateUI();
   }
 
+  /**
+   * A helper method to disable overlays with smooth transitions.
+   * @param evt Disable overlays when they are done transitioning.
+   */
   private overlayTransitionEndListener(evt: TransitionEvent) {
     (evt.target as HTMLDivElement).classList.add("hide");
   }
 
+  /**
+   * When the info button is clicked.
+   */
   private onClickInfo(): void {
     this.infoOverlayElement.removeEventListener(
       "transitionend",
@@ -138,6 +152,9 @@ export class App {
     });
   }
 
+  /**
+   * When the info overlay is closed using the close button.
+   */
   private onCloseInfo(): void {
     this.infoOverlayElement.style.opacity = "0";
     this.infoOverlayElement.addEventListener(
@@ -146,12 +163,20 @@ export class App {
     );
   }
 
+  /**
+   * When tree input changes.
+   * @param evt Current change event.
+   */
   private onTreeInputChanged(evt: Event): void {
     const treeInput = (evt.target as HTMLInputElement).value;
     this.updateState(treeInput);
     this.updateUI();
   }
 
+  /**
+   * Updates the state of the application based on the tree input provided.
+   * @param treeInput The tree input to use to update the state of the application.
+   */
   private updateState(treeInput: string) {
     let tree: TreeNode | null = this.state.tree;
     let scrollAreaSize: Size = this.state.scrollAreaSize;
@@ -172,6 +197,9 @@ export class App {
     };
   }
 
+  /**
+   * Update different UI Elements.
+   */
   private updateUI(): void {
     this.updateInspectorUI();
     this.updateGridElementUI();
@@ -179,9 +207,13 @@ export class App {
     this.scrollToRootNode();
   }
 
+  /**
+   * Update the inspector UI
+   */
   private updateInspectorUI() {
     const { treeInput, treeParserError } = this.state;
 
+    // Change the border color based on error state.
     if (!treeInput.trim()) {
       this.treeInputElement.style.borderBottom =
         TREE_INPUT_NEUTRAL_BORDER_BOTTOM;
@@ -192,6 +224,7 @@ export class App {
       this.treeInputElement.style.borderBottom = TREE_INPUT_VALID_BORDER_BOTTOM;
     }
 
+    // Enable/Disable recenter button based on the error state.
     if (treeParserError) {
       this.recenterButtonElement.disabled = true;
     } else {
@@ -199,6 +232,9 @@ export class App {
     }
   }
 
+  /**
+   * Updates the grid area size to enable scrolling.
+   */
   private updateGridElementUI() {
     const { scrollAreaSize, tree } = this.state;
 
@@ -209,6 +245,10 @@ export class App {
     this.createTreeUI(tree);
   }
 
+  /**
+   * Creates the DOM elements to render the tree.
+   * @param root The root node of the tree
+   */
   private createTreeUI(root: TreeNode | null): void {
     if (root === null) return;
 
@@ -219,12 +259,20 @@ export class App {
     this.createTreeUI(root.right);
   }
 
+  /**
+   * Converts tree nodes to DOM elements recursively.
+   * @param root The root node of the tree.
+   */
   private createTreeNodeElement(root: TreeNode): void {
     const rootElement = document.createElement("div");
     rootElement.classList.add("node");
+
+    // If leaf node.
     if (root.left === null && root.right === null) {
       rootElement.classList.add("leaf");
     }
+
+    // Assign styles.
     rootElement.style.width = NODE_SIZE + "px";
     rootElement.style.height = NODE_SIZE + "px";
     rootElement.style.left = root.x - NODE_SIZE / 2 + "px";
@@ -237,7 +285,12 @@ export class App {
     this.gridElement.appendChild(rootElement);
   }
 
+  /**
+   * Creates svg lines connecting nodes recursively.
+   * @param root The root node of the tree.
+   */
   private createLineElements(root: TreeNode): void {
+    // Common properties between left and right directed lines.
     const createTemplateLineElements = () => {
       const lineSvgNode = document.createElementNS(
         "http://www.w3.org/2000/svg",
@@ -269,6 +322,8 @@ export class App {
       lineSvgNode.style.width = width + "px";
       lineSvgNode.style.height = height + "px";
       lineSvgNode.style.left = root.left.x + "px";
+
+      // Facing left
       lineNode.setAttributeNS(null, "x1", "100%");
       lineNode.setAttributeNS(null, "x2", "0%");
     }
@@ -282,11 +337,16 @@ export class App {
       lineSvgNode.style.width = width + "px";
       lineSvgNode.style.height = height + "px";
       lineSvgNode.style.left = root.x + "px";
+
+      // Facing right
       lineNode.setAttributeNS(null, "x1", "0%");
       lineNode.setAttributeNS(null, "x2", "100%");
     }
   }
 
+  /**
+   * Update the error overlay to show errors if any.
+   */
   private updateErrorElementsUI(): void {
     const { treeParserError } = this.state;
     if (treeParserError) {
@@ -309,8 +369,13 @@ export class App {
     }
   }
 
+  /**
+   * Scrolls to root node of the generated tree. Called when recenter is clicked.
+   */
   private scrollToRootNode(): void {
     const { tree, treeParserError } = this.state;
+
+    // If tree exists and tree input is valid.
     if (tree && !treeParserError) {
       const left = tree.x - this.scrollAreaElement.clientWidth / 2;
       this.scrollAreaElement.scroll({

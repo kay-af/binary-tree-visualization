@@ -1,10 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
 
-$root-background: radial-gradient(circle at 0% 50%, #3b3c42, #2c2f40 60%, #21222a);
-$info-overlay-background: radial-gradient(circle at 0% 0%, #3b3c42, #2c2f40 60%, #21222a);
-$inspector-background: radial-gradient(circle at 0% 0%, #212f4b, #293342);
-$node-background: linear-gradient(45deg, #1b1b3a 10%, #693668 50%, #a74482 50%, #f84aa7 100%);
+$root-background: radial-gradient(circle at 50% 50%, #323441, #323441 50%, #212226);
+$inspector-background: radial-gradient(circle at 0% 0%, #40434d, #414b7b);
 $shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+$error-overlay-backdrop: rgba(25, 0, 0, 0.6);
+
+$info-overlay-backdrop: rgba(0, 0, 0, 0.6);
+$info-overlay-background: radial-gradient(circle at 0% 0%, #212124, #3b3542 50%, #212124);
+$info-card-heading-color: #445;
+
+$node-background: linear-gradient(45deg, #1b1b3a 10%, #693668 50%, #a74482 50%, #f84aa7 100%);
 
 $size-xs: 4px;
 $size-sm: 8px;
@@ -161,7 +167,7 @@ body {
     position: absolute;
     z-index: 100;
     inset: 0px;
-    background: rgba(25, 0, 0, 0.7);
+    background: $error-overlay-backdrop;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -175,12 +181,13 @@ body {
     }
 
     #error-title {
-      color: white;
+      color: salmon;
       font-size: x-large;
+      font-weight: bold;
     }
 
     #error-message {
-      color: salmon;
+      color: #ccc;
       font-size: medium;
     }
   }
@@ -188,7 +195,7 @@ body {
   #info-overlay {
     position: fixed;
     inset: 0px;
-    background: rgba(0, 0, 0, 0.6);
+    background: $info-overlay-backdrop;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -217,7 +224,7 @@ body {
       animation: scale-up 225ms ease-out forwards;
 
       #info-card-heading {
-        background: #445;
+        background: $info-card-heading-color;
         width: 100%;
         display: flex;
         padding: $size-md;
