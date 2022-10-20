@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Binary Tree Visualization</title>
+    <script defer type="module" src="scripts/index.ts"></script>
+    <link rel="stylesheet" href="styles.scss" />
+  </head>
+  <body>
+    <div id="root">
+      <div id="inspector">
+        <label id="tree-input-label" for="tree-input">Tree Input</label>
+        <input id="tree-input" />
+      </div>
+      <div id="scene">
+        <div id="scroll-area">
+          <div id="grid"></div>
+        </div>
+        <div id="error-overlay" class="hide">
+          <p id="error-title"></p>
+          <p id="error-message"></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

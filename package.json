@@ -1,0 +1,14 @@
+{
+  "name": "binary-tree-visualization",
+  "version": "1.0.0",
+  "license": "MIT",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.7.0",
+    "parcel": "^2.7.0"
+  }
+}

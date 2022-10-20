@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+
+$root-background: radial-gradient(circle at 0% 50%, #3b3c42, #2c2f40 60%, #21222a);
+$inspector-background: radial-gradient(circle at 0% 0%, #212f4b, #293342);
+$node-background: linear-gradient(45deg, #1B1B3A 10%, #693668 50%,#A74482 50%, #F84AA7 100%);
+$shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+$size-xs: 4px;
+$size-sm: 8px;
+$size-md: 16px;
+$size-lg: 32px;
+$size-xl: 64px;
+
+$grid-size: 32px;
+$grid-color: #ffffff20;
+
+* {
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
+}
+
+body { margin: 0px; }
+
+#root {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: $root-background;
+}
+
+#inspector {
+  width: 100%;
+  padding: $size-md;
+  display: flex;
+  flex-direction: row;
+  gap: $size-md;
+  background: $inspector-background;
+  box-shadow: $shadow;
+  color: white;
+  align-items: center;
+  font-size: small;
+
+  input {
+    width: 0px;
+    max-width: 400px;
+    flex: 1;
+    background: rgba(0, 0, 0, 0.25);
+    outline: none;
+    border: none;
+    color: white;
+    padding: $size-sm;
+    border-radius: $size-xs;
+    font-weight: bold;
+    font-size: $size-md;
+    border-bottom: 2px solid white;
+    word-spacing: $size-sm;
+    font-size: small;
+    transition: border-bottom 225ms;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    &:focus {
+      background: rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+#scene {
+  width: 100%;
+  height: 0px;
+  flex: 1;
+  position: relative;
+
+  #scroll-area {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: auto;
+
+    #grid {
+      position: absolute;
+      z-index: 0;
+      top: 0px;
+      left: 0px;
+      background: linear-gradient(to right, transparent 0px, transparent calc($grid-size - 1px), $grid-color calc($grid-size - 1px), $grid-color $grid-size),
+        linear-gradient(to bottom, transparent 0px, transparent calc($grid-size - 1px), $grid-color calc($grid-size - 1px), $grid-color $grid-size);
+      background-size: $grid-size $grid-size;
+      background-repeat: repeat;
+
+      .node {
+        border-radius: 60px;
+        background: $node-background;
+        box-shadow: $shadow;
+        position: absolute;
+        z-index: 50;
+        display: flex;
+        border: 1px solid white;
+        transition: 225ms;
+        padding: $size-sm;
+        user-select: none;
+
+        p {
+          color: white;
+          margin: auto;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        &:hover {
+          width: 120px !important;
+          z-index: 100;
+        }
+      }
+
+      .leaf {
+        border-radius: $size-xs;
+      }
+
+      .line {
+        position: absolute;
+      }
+    }
+  }
+
+  #error-overlay {
+    display: flex;
+    opacity: 0;
+    position: absolute;
+    z-index: 100;
+    inset: 0px;
+    background: rgba(25, 0, 0, 0.5);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $size-md;
+    padding-inline: $size-lg;
+    transition: opacity 250ms;
+
+    p {
+      margin: 0px auto;
+    }
+
+    #error-title {
+      color: white;
+      font-size: x-large;
+    }
+
+    #error-message {
+      color: salmon;
+      font-size: medium;
+    }
+  }
+}
+
+.hide {
+  display: none !important;
+}
