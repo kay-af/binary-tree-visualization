@@ -1,13 +1,21 @@
 import { Size, TreeNode, TreeParser, TreeParserError } from "./utils";
 
+// Border bottom styles based on tree input.
 const TREE_INPUT_NEUTRAL_BORDER_BOTTOM = "2px solid white";
 const TREE_INPUT_VALID_BORDER_BOTTOM = "2px solid lightgreen";
 const TREE_INPUT_INVALID_BORDER_BOTTOM = "2px solid orangered";
+
+// Base size of the node div in scroll area.
 const NODE_SIZE = 80;
 
+/**
+ * Application configuration.
+ */
 interface AppConfig {
   identifiers: {
     treeInput: string;
+    recenterButton: string;
+    infoButton: string;
     scrollArea: string;
     grid: string;
     errorOverlay: string;
@@ -17,6 +25,9 @@ interface AppConfig {
   initialTreeInput: string;
 }
 
+/**
+ * Application state.
+ */
 interface AppState {
   treeInput: string;
   treeParserError: TreeParserError | null;
@@ -31,6 +42,7 @@ const defaultAppState: AppState = {
   scrollAreaSize: { width: 0, height: 0 },
 };
 
+/** Driver class for the application. */
 export class App {
   private readonly treeInputElement: HTMLInputElement;
   private readonly scrollAreaElement: HTMLDivElement;
@@ -38,6 +50,8 @@ export class App {
   private readonly errorOverlayElement: HTMLDivElement;
   private readonly errorTitleElement: HTMLParagraphElement;
   private readonly errorMessageElement: HTMLParagraphElement;
+  private readonly recenterButtonElement: HTMLButtonElement;
+  private readonly infoButtonElement: HTMLButtonElement;
 
   private initialTreeInput: string;
   private state: AppState;
@@ -47,6 +61,12 @@ export class App {
     this.treeInputElement = document.getElementById(
       config.identifiers.treeInput
     ) as HTMLInputElement;
+    this.recenterButtonElement = document.getElementById(
+      config.identifiers.recenterButton
+    ) as HTMLButtonElement;
+    this.infoButtonElement = document.getElementById(
+      config.identifiers.infoButton
+    ) as HTMLButtonElement;
     this.scrollAreaElement = document.getElementById(
       config.identifiers.scrollArea
     ) as HTMLDivElement;
@@ -72,9 +92,14 @@ export class App {
 
   public initialize(): void {
     this.treeInputElement.value = this.initialTreeInput;
+    this.treeInputElement.focus();
     this.treeInputElement.addEventListener(
       "input",
       this.onTreeInputChanged.bind(this)
+    );
+    this.recenterButtonElement.addEventListener(
+      "click",
+      this.scrollToRootNode.bind(this)
     );
     this.updateState(this.initialTreeInput);
     this.updateUI();
@@ -107,13 +132,13 @@ export class App {
   }
 
   private updateUI(): void {
-    this.updateTreeInputElementUI();
+    this.updateInspectorUI();
     this.updateGridElementUI();
     this.updateErrorElementsUI();
     this.scrollToRootNode();
   }
 
-  private updateTreeInputElementUI() {
+  private updateInspectorUI() {
     const { treeInput, treeParserError } = this.state;
 
     if (!treeInput.trim()) {
@@ -124,6 +149,12 @@ export class App {
         TREE_INPUT_INVALID_BORDER_BOTTOM;
     } else {
       this.treeInputElement.style.borderBottom = TREE_INPUT_VALID_BORDER_BOTTOM;
+    }
+
+    if (treeParserError) {
+      this.recenterButtonElement.disabled = true;
+    } else {
+      this.recenterButtonElement.disabled = false;
     }
   }
 
@@ -242,11 +273,11 @@ export class App {
   }
 
   private scrollToRootNode(): void {
-    const { tree } = this.state;
-    if (tree) {
+    const { tree, treeParserError } = this.state;
+    if (tree && !treeParserError) {
       const left = tree.x - this.scrollAreaElement.clientWidth / 2;
-      this.scrollAreaElement.scrollTo({
-        behavior: "auto",
+      this.scrollAreaElement.scroll({
+        behavior: "smooth",
         left,
         top: 0,
       });
@@ -257,6 +288,8 @@ export class App {
 const appConfig: AppConfig = {
   identifiers: {
     treeInput: "tree-input",
+    recenterButton: "recenter-button",
+    infoButton: "info-button",
     scrollArea: "scroll-area",
     grid: "grid",
     errorOverlay: "error-overlay",

@@ -7,12 +7,25 @@
     <title>Binary Tree Visualization</title>
     <script defer type="module" src="scripts/index.ts"></script>
     <link rel="stylesheet" href="styles.scss" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <div id="root">
       <div id="inspector">
         <label id="tree-input-label" for="tree-input">Tree Input</label>
-        <input id="tree-input" />
+        <input id="tree-input" placeholder="Tree input" />
+        <button id="recenter-button">
+          <i class="fa-solid fa-arrows-to-dot"></i>
+        </button>
+        <button id="info-button">
+          <i class="fa-solid fa-circle-info"></i>
+        </button>
       </div>
       <div id="scene">
         <div id="scroll-area">
