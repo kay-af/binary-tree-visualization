@@ -7,9 +7,9 @@ const ERROR_MESSAGE_NOT_AN_INTEGER =
   "Only integer values and 'N' / 'n' (Null) are supported in tree input";
 const ERROR_MESSAGE_OUT_OF_RANGE = "Only 32-bit signed integers are supported";
 
-const X_MULTIPLIER = 100;
-const Y_MULTIPLIER = 100;
-const SCROLL_AREA_PADDING = 100;
+const X_MULTIPLIER = 140;
+const Y_MULTIPLIER = 140;
+const SCROLL_AREA_PADDING = 140;
 
 export class TreeParserError {
   public readonly title: string;
@@ -31,6 +31,21 @@ export class TreeParser {
     return root;
   }
 
+  private static isValidInteger(value: string) {
+    if (value.length === 0) return false;
+    if (value.length === 1 && value[0] === "-") return false;
+    let minus = 0;
+    for (let i = 0; i < value.length; i++) {
+      if (value[i] < "0" || value[i] > "9") {
+        if (value[i] === "-") minus++;
+        else return false;
+      }
+    }
+    if (minus > 1) return false;
+    if (minus === 1 && value[0] !== "-") return false;
+    return true;
+  }
+
   private static parseValues(treeInput: string): Array<number | null> {
     treeInput = treeInput.trim();
     treeInput = treeInput.replace(REGEX_ONE_OR_MORE_SPACES, " ");
@@ -40,12 +55,12 @@ export class TreeParser {
     let tokens: Array<string> = treeInput.split(" ");
     const nodeValues = tokens.map((token) => {
       if (token.toUpperCase() === "N") return null;
-      const value = Number.parseInt(token);
-      if (!Number.isInteger(value))
+      if (!this.isValidInteger(token))
         throw new TreeParserError(
           "Invalid Input",
           ERROR_MESSAGE_NOT_AN_INTEGER
         );
+      const value = Number.parseInt(token);
       if (
         !Number.isFinite(value) ||
         value > Math.pow(2, 31) - 1 ||

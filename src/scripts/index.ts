@@ -3,6 +3,7 @@ import { Size, TreeNode, TreeParser, TreeParserError } from "./utils";
 const TREE_INPUT_NEUTRAL_BORDER_BOTTOM = "2px solid white";
 const TREE_INPUT_VALID_BORDER_BOTTOM = "2px solid lightgreen";
 const TREE_INPUT_INVALID_BORDER_BOTTOM = "2px solid orangered";
+const NODE_SIZE = 80;
 
 interface AppConfig {
   identifiers: {
@@ -152,10 +153,10 @@ export class App {
     if (root.left === null && root.right === null) {
       rootElement.classList.add("leaf");
     }
-    rootElement.style.width = "60px";
-    rootElement.style.height = "60px";
-    rootElement.style.left = root.x - 30 + "px";
-    rootElement.style.top = root.y - 30 + "px";
+    rootElement.style.width = NODE_SIZE + "px";
+    rootElement.style.height = NODE_SIZE + "px";
+    rootElement.style.left = root.x - NODE_SIZE / 2 + "px";
+    rootElement.style.top = root.y - NODE_SIZE / 2 + "px";
 
     const pElement = document.createElement("p");
     pElement.innerText = root.value.toString();
@@ -224,7 +225,9 @@ export class App {
       this.errorTitleElement.innerText = treeParserError.title;
       this.errorMessageElement.innerText = treeParserError.message;
       this.errorOverlayElement.classList.remove("hide");
-      this.errorOverlayElement.style.opacity = "1";
+      requestAnimationFrame(
+        () => (this.errorOverlayElement.style.opacity = "1")
+      );
     } else {
       this.errorOverlayElement.style.opacity = "0";
       this.errorOverlayElement.addEventListener(
@@ -243,7 +246,9 @@ export class App {
     if (tree) {
       const left = tree.x - this.scrollAreaElement.clientWidth / 2;
       this.scrollAreaElement.scrollTo({
+        behavior: "auto",
         left,
+        top: 0,
       });
     }
   }

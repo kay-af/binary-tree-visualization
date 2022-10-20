@@ -99,7 +99,7 @@ body { margin: 0px; }
         display: flex;
         border: 1px solid white;
         transition: 225ms;
-        padding: $size-sm;
+        padding: $size-md;
         user-select: none;
 
         p {
@@ -110,7 +110,8 @@ body { margin: 0px; }
         }
 
         &:hover {
-          width: 120px !important;
+          width: 140px !important;
+          transform: translateX(-30px);
           z-index: 100;
         }
       }
