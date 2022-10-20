@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
 
 $root-background: radial-gradient(circle at 0% 50%, #3b3c42, #2c2f40 60%, #21222a);
+$info-overlay-background: radial-gradient(circle at 0% 0%, #3b3c42, #2c2f40 60%, #21222a);
 $inspector-background: radial-gradient(circle at 0% 0%, #212f4b, #293342);
 $node-background: linear-gradient(45deg, #1b1b3a 10%, #693668 50%, #a74482 50%, #f84aa7 100%);
 $shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
@@ -46,36 +47,6 @@ body {
   #tree-input-label {
     @media (max-width: 400px) {
       display: none;
-    }
-  }
-
-  button {
-    font-size: large;
-    color: white;
-    background: transparent;
-    border: none;
-    border-radius: $size-xs;
-    padding: 0px;
-    width: 38px;
-    height: 32px;
-    cursor: pointer;
-
-    &:disabled {
-      color: gray;
-      pointer-events: none;
-    }
-
-    &:hover {
-      background: #fff1;
-    }
-
-    &:focus-visible {
-      outline: 1px solid white;
-      background: #fff1;
-    }
-
-    &:active {
-      background: #fff2;
     }
   }
 
@@ -191,16 +162,16 @@ body {
     z-index: 100;
     inset: 0px;
     background: rgba(25, 0, 0, 0.7);
-    backdrop-filter: blur(1px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: $size-md;
     padding-inline: $size-lg;
-    transition: opacity 225ms, backdrop-filter 225ms;
+    transition: opacity 225ms;
 
     p {
       margin: 0px auto;
+      text-align: center;
     }
 
     #error-title {
@@ -213,8 +184,156 @@ body {
       font-size: medium;
     }
   }
+
+  #info-overlay {
+    position: fixed;
+    inset: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $size-sm;
+    z-index: 150;
+    transition: opacity 225ms;
+    opacity: 0;
+
+    @keyframes scale-up {
+      from { transform: scale(50%) }
+      to { transform: scale(100%) }
+    }
+
+    #info-card {
+      background: $info-overlay-background;
+      color: white;
+      box-shadow: $shadow;
+      border-radius: $size-xs;
+      width: min(100%, 500px);
+      height: min(100%, 500px);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      overflow: hidden;
+      animation: scale-up 225ms ease-out forwards;
+
+      #info-card-heading {
+        background: #445;
+        width: 100%;
+        display: flex;
+        padding: $size-md;
+        flex-direction: row;
+        gap: $size-md;
+        padding: $size-md;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: $shadow;
+        z-index: 200;
+
+        .icon-button {
+          width: 32px !important;
+        }
+
+        p {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+
+      #info-card-body {
+        width: 100%;
+        height: 0px;
+        flex: 1;
+        padding: $size-md;
+        overflow: auto;
+        z-index: 170;
+
+        .github-anchor {
+          font-size: x-large;
+          color: white;
+          margin-inline: $size-xs;
+          text-decoration: none;
+        }
+
+        #examples {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          gap: $size-sm;
+
+          .example-stack {
+            width: 0px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: $size-sm;
+
+            .example-img {
+              width: 100%;
+              aspect-ratio: 1 / 1;
+              border-radius: $size-xs;
+            }
+
+            p {
+              text-align: center;
+              word-spacing: $size-sm;
+
+              @media (max-width: 400px) {
+                font-size: x-small;
+              }
+            }
+          }
+        }
+
+        p {
+          color: #ccc;
+          font-size: small;
+          line-height: 150%;
+          text-align: justify;
+          &.heading {
+            font-size: medium;
+            margin-bottom: $size-md;
+          }
+        }
+      }
+
+      p {
+        margin: 0px;
+      }
+    }
+  }
 }
 
 .hide {
   display: none !important;
+}
+
+.icon-button {
+  font-size: large;
+  color: white;
+  background: transparent;
+  border: none;
+  border-radius: $size-xs;
+  padding: 0px;
+  width: 38px;
+  height: 32px;
+  cursor: pointer;
+
+  &:disabled {
+    color: gray;
+    pointer-events: none;
+  }
+
+  &:hover {
+    background: #fff1;
+  }
+
+  &:focus-visible {
+    outline: 1px solid white;
+    background: #fff1;
+  }
+
+  &:active {
+    background: #fff2;
+  }
 }

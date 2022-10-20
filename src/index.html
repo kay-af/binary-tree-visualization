@@ -20,10 +20,10 @@
       <div id="inspector">
         <label id="tree-input-label" for="tree-input">Tree Input</label>
         <input id="tree-input" placeholder="Tree input" />
-        <button id="recenter-button">
+        <button class="icon-button" id="recenter-button">
           <i class="fa-solid fa-arrows-to-dot"></i>
         </button>
-        <button id="info-button">
+        <button class="icon-button" id="info-button">
           <i class="fa-solid fa-circle-info"></i>
         </button>
       </div>
@@ -34,6 +34,81 @@
         <div id="error-overlay" class="hide">
           <p id="error-title"></p>
           <p id="error-message"></p>
+        </div>
+        <div id="info-overlay" class="hide">
+          <div id="info-card">
+            <div id="info-card-heading">
+              <p>Binary Tree Visualization</p>
+              <button class="icon-button" id="info-close-button">
+                <i class="fa-solid fa-circle-xmark"></i>
+              </button>
+            </div>
+            <div id="info-card-body">
+              <p class="heading">
+                <b>Tree Input</b>
+              </p>
+              <p>
+                Tree input is a string that represents the structure of the
+                binary tree. It consists of space-separated 32 bit signed
+                integer values and the alphabet 'n' (case-insensitive)
+                signifying a
+                <b>NULL</b> node.
+              </p>
+              <br />
+              <p>
+                The values are essentially the result of level order traversal
+                of the resulting binary tree. To signify a null node on a level,
+                the alphabet 'n' (case-insensitive) is used. Null nodes have no
+                children so they are skipped when rendering the next level
+                (children of the current level) of the binary tree.
+              </p>
+              <br />
+              <p>Some Examples:</p>
+              <br />
+              <div id="examples">
+                <div class="example-stack">
+                  <img class="example-img" src="assets/example0.png" />
+                  <p>1 2 3</p>
+                </div>
+                <div class="example-stack">
+                  <img class="example-img" src="assets/example1.png" />
+                  <p>1 N 3</p>
+                </div>
+                <div class="example-stack">
+                  <img class="example-img" src="assets/example2.png" />
+                  <p>1 N 3 4 5</p>
+                </div>
+              </div>
+              <br />
+              <br />
+              <p class="heading">
+                <i class="fa-solid fa-arrows-to-dot"></i>
+                &nbsp;
+                <b>Recenter Button</b>
+              </p>
+              <p>
+                When the tree is generated, press this button to scroll the view
+                to the root node if lost.
+              </p>
+              <br />
+              <br />
+              <p class="heading">
+                <b>About the project</b>
+              </p>
+              <p>
+                Here is the
+                <a
+                  href="https://github.com/kay-af/binary-tree-visualization"
+                  target="_blank"
+                  rel="noreferer noopener"
+                  class="github-anchor"
+                >
+                  <i class="fa-brands fa-github"></i>
+                </a>
+                repository of the project.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

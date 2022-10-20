@@ -21,6 +21,8 @@ interface AppConfig {
     errorOverlay: string;
     errorTitle: string;
     errorMessage: string;
+    infoOverlay: string;
+    infoCloseButton: string;
   };
   initialTreeInput: string;
 }
@@ -52,6 +54,8 @@ export class App {
   private readonly errorMessageElement: HTMLParagraphElement;
   private readonly recenterButtonElement: HTMLButtonElement;
   private readonly infoButtonElement: HTMLButtonElement;
+  private readonly infoOverlayElement: HTMLDivElement;
+  private readonly infoCloseButtonElement: HTMLButtonElement;
 
   private initialTreeInput: string;
   private state: AppState;
@@ -82,6 +86,12 @@ export class App {
     this.errorMessageElement = document.getElementById(
       config.identifiers.errorMessage
     ) as HTMLParagraphElement;
+    this.infoOverlayElement = document.getElementById(
+      config.identifiers.infoOverlay
+    ) as HTMLDivElement;
+    this.infoCloseButtonElement = document.getElementById(
+      config.identifiers.infoCloseButton
+    ) as HTMLButtonElement;
 
     // Initial state
     this.initialTreeInput = config.initialTreeInput;
@@ -101,8 +111,39 @@ export class App {
       "click",
       this.scrollToRootNode.bind(this)
     );
+    this.infoButtonElement.addEventListener(
+      "click",
+      this.onClickInfo.bind(this)
+    );
+    this.infoCloseButtonElement.addEventListener(
+      "click",
+      this.onCloseInfo.bind(this)
+    );
     this.updateState(this.initialTreeInput);
     this.updateUI();
+  }
+
+  private overlayTransitionEndListener(evt: TransitionEvent) {
+    (evt.target as HTMLDivElement).classList.add("hide");
+  }
+
+  private onClickInfo(): void {
+    this.infoOverlayElement.removeEventListener(
+      "transitionend",
+      this.overlayTransitionEndListener
+    );
+    this.infoOverlayElement.classList.remove("hide");
+    requestAnimationFrame(() => {
+      this.infoOverlayElement.style.opacity = "1";
+    });
+  }
+
+  private onCloseInfo(): void {
+    this.infoOverlayElement.style.opacity = "0";
+    this.infoOverlayElement.addEventListener(
+      "transitionend",
+      this.overlayTransitionEndListener
+    );
   }
 
   private onTreeInputChanged(evt: Event): void {
@@ -251,7 +292,7 @@ export class App {
     if (treeParserError) {
       this.errorOverlayElement.removeEventListener(
         "transitionend",
-        this.errorOverlayTransitionEndListener
+        this.overlayTransitionEndListener
       );
       this.errorTitleElement.innerText = treeParserError.title;
       this.errorMessageElement.innerText = treeParserError.message;
@@ -263,13 +304,9 @@ export class App {
       this.errorOverlayElement.style.opacity = "0";
       this.errorOverlayElement.addEventListener(
         "transitionend",
-        this.errorOverlayTransitionEndListener
+        this.overlayTransitionEndListener
       );
     }
-  }
-
-  private errorOverlayTransitionEndListener(evt: TransitionEvent) {
-    (evt.target as HTMLDivElement).classList.add("hide");
   }
 
   private scrollToRootNode(): void {
@@ -295,6 +332,8 @@ const appConfig: AppConfig = {
     errorOverlay: "error-overlay",
     errorTitle: "error-title",
     errorMessage: "error-message",
+    infoOverlay: "info-overlay",
+    infoCloseButton: "info-close-button",
   },
   initialTreeInput: "",
 };
