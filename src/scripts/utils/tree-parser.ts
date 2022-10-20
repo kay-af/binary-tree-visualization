@@ -5,11 +5,11 @@ import { TreeNode } from "./tree-node";
 const REGEX_ONE_OR_MORE_SPACES = /\s+/g;
 
 // The x scaling space out nodes in scroll area.
-const X_MULTIPLIER = 140;
+const X_MULTIPLIER = 120;
 // The y scaling to space out nodes in scroll area.
-const Y_MULTIPLIER = 140;
+const Y_MULTIPLIER = 120;
 // The padding to use in scroll area after creating the tree.
-const SCROLL_AREA_PADDING = 140;
+const SCROLL_AREA_PADDING = 120;
 
 /** Represents errors related to tree input. */
 export class TreeParserError {

@@ -5,8 +5,12 @@ const TREE_INPUT_NEUTRAL_BORDER_BOTTOM = "2px solid white";
 const TREE_INPUT_VALID_BORDER_BOTTOM = "2px solid lightgreen";
 const TREE_INPUT_INVALID_BORDER_BOTTOM = "2px solid orangered";
 
+// SVG line properties
+const LINE_COLOR = "#fff9";
+const LINE_THICKNESS = "2";
+
 // Base size of the node div in scroll area.
-const NODE_SIZE = 80;
+const NODE_SIZE = 60;
 
 /**
  * Application configuration.
@@ -303,8 +307,8 @@ export class App {
         "http://www.w3.org/2000/svg",
         "line"
       );
-      lineNode.setAttributeNS(null, "stroke", "white");
-      lineNode.setAttributeNS(null, "stroke-width", "2");
+      lineNode.setAttributeNS(null, "stroke", LINE_COLOR);
+      lineNode.setAttributeNS(null, "stroke-width", LINE_THICKNESS);
       lineNode.setAttributeNS(null, "y1", "0%");
       lineNode.setAttributeNS(null, "y2", "100%");
       lineSvgNode.appendChild(lineNode);

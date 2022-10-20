@@ -1,16 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
 
-$root-background: radial-gradient(circle at 50% 50%, #323441, #323441 50%, #212226);
-$inspector-background: radial-gradient(circle at 0% 0%, #40434d, #414b7b);
+$c0: #002029;
+$c1: #00303d;
+$c2: #00607a;
+$c3: #5c2e0a;
+$c4: #81400e;
+$c5: #944910;
+$c6: #b95b13;
+
+$root-background: radial-gradient(circle at 50% 50%, $c1, $c1 50%, $c0);
+$inspector-background: $c2;
 $shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
 $error-overlay-backdrop: rgba(25, 0, 0, 0.6);
 
 $info-overlay-backdrop: rgba(0, 0, 0, 0.6);
-$info-overlay-background: radial-gradient(circle at 0% 0%, #212124, #3b3542 50%, #212124);
-$info-card-heading-color: #445;
+$info-overlay-background: radial-gradient(circle at 0% 0%, $c0, $c1 50%, $c0);
+$info-card-heading-color: $c2;
 
-$node-background: linear-gradient(45deg, #1b1b3a 10%, #693668 50%, #a74482 50%, #f84aa7 100%);
+$node-background: linear-gradient(45deg, $c3 10%, $c4 50%, $c5 50%, $c6 100%);
 
 $size-xs: 4px;
 $size-sm: 8px;
@@ -132,9 +140,9 @@ body {
         position: absolute;
         z-index: 50;
         display: flex;
-        border: 1px solid white;
+        outline: 1px solid white;
         transition: 225ms;
-        padding: $size-md;
+        padding: $size-sm;
         user-select: none;
 
         p {
@@ -146,7 +154,7 @@ body {
 
         &:hover {
           width: 140px !important;
-          transform: translateX(-30px);
+          transform: translateX(-40px);
           z-index: 100;
         }
       }
@@ -279,6 +287,7 @@ body {
               width: 100%;
               aspect-ratio: 1 / 1;
               border-radius: $size-xs;
+              border: 1px dashed white;
             }
 
             p {
@@ -289,6 +298,26 @@ body {
                 font-size: x-small;
               }
             }
+          }
+        }
+
+        #hover-example-container {
+          display: flex;
+          flex-direction: row;
+          gap: $size-md;
+          align-items: flex-start;
+          flex-wrap: wrap;
+
+          p {
+            flex: 1;
+            min-width: 200px;
+          }
+
+          img {
+            border: 1px dashed white;
+            width: 160px;
+            aspect-ratio: 1 / 1;
+            border-radius: $size-xs;
           }
         }
 
