@@ -105,3 +105,7 @@ dist
 
 # Parcel
 .parcel-cache
+
+# Github pages deployment
+gh-pages-dist
+gh-pages-deploy.js

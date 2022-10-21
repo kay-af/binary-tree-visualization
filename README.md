@@ -18,4 +18,6 @@ Node is required to run the project locally. To run locally,
 
 By default, parcel serves the app at `http://localhost:1234`
 
-Build the project using `yarn build` or `npm build`.
+## Building The App
+
+Build the app using `yarn build` or `npm build` command. The files to be served can be found inside the generated `dist` folder post build.
