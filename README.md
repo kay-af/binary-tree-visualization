@@ -2,7 +2,7 @@
 
 A simple web application to visualize a binary tree given it's level order string representation.
 
-<a href="https://kay-af.github.io/binary-tree-visualization/" target="_blank">Click here</a> to try it out.
+<a href="https://kay-af.github.io/binary-tree-visualization/">Click here</a> to try it out.
 
 <img src="preview/preview.gif" />
 
