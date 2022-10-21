@@ -1,7 +1,5 @@
 # Binary Tree Visualization
 
-## Introduction
-
 A simple web application to visualize a binary tree given it's level order string representation.
 
 <img src="preview/preview.gif" />
