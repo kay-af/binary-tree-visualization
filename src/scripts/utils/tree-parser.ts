@@ -84,7 +84,7 @@ export class TreeParser {
       if (!this.isValidInteger(token))
         throw new TreeParserError(
           "Invalid Input",
-          "Tree input shall consists of either numbers or the character 'N' (Case-insensitve) signifying null."
+          "Tree input shall consist of either numbers or the character 'N' (Case-insensitive) indicating a node with null value."
         );
       const value = Number.parseInt(token);
 

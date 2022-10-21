@@ -27,6 +27,7 @@ interface AppConfig {
     errorMessage: string;
     infoOverlay: string;
     infoCloseButton: string;
+    infoCardBody: string;
   };
   initialTreeInput: string;
 }
@@ -60,6 +61,7 @@ export class App {
   private readonly infoButtonElement: HTMLButtonElement;
   private readonly infoOverlayElement: HTMLDivElement;
   private readonly infoCloseButtonElement: HTMLButtonElement;
+  private readonly infoCardBodyElement: HTMLDivElement;
 
   private initialTreeInput: string;
   private state: AppState;
@@ -100,6 +102,9 @@ export class App {
     this.infoCloseButtonElement = document.getElementById(
       config.identifiers.infoCloseButton
     ) as HTMLButtonElement;
+    this.infoCardBodyElement = document.getElementById(
+      config.identifiers.infoCardBody
+    ) as HTMLDivElement;
 
     // Initial state
     this.initialTreeInput = config.initialTreeInput;
@@ -153,6 +158,11 @@ export class App {
     this.infoOverlayElement.classList.remove("hide");
     requestAnimationFrame(() => {
       this.infoOverlayElement.style.opacity = "1";
+
+      // Scroll the info body to top.
+      this.infoCardBodyElement.scrollTo({
+        top: 0,
+      });
     });
   }
 
@@ -208,7 +218,6 @@ export class App {
     this.updateInspectorUI();
     this.updateGridElementUI();
     this.updateErrorElementsUI();
-    this.scrollToRootNode();
   }
 
   /**
@@ -403,9 +412,16 @@ const appConfig: AppConfig = {
     errorMessage: "error-message",
     infoOverlay: "info-overlay",
     infoCloseButton: "info-close-button",
+    infoCardBody: "info-card-body",
   },
   initialTreeInput: "",
 };
 
 const app = new App(appConfig);
 app.initialize();
+
+// Log github link.
+console.log(
+  "%cGithub Project Link: https://github.com/kay-af/binary-tree-visualization\nPlease leave a ⭐️ if you like my work!",
+  "background: whitesmoke; color: black; border: 1px dashed black; font-weight: bold; font-size: larger; padding: 8px 16px; margin: 4px 0px;"
+);

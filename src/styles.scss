@@ -243,6 +243,7 @@ body {
         align-items: center;
         box-shadow: $shadow;
         z-index: 200;
+        overflow: auto;
 
         .icon-button {
           width: 32px !important;
