@@ -6,7 +6,8 @@
   "scripts": {
     "start": "parcel",
     "prebuild": "rm -rf ./dist",
-    "build": "parcel build"
+    "build": "parcel build",
+    "deploy-gh-pages": "node deploy-gh-pages"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.7.0",
