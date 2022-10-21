@@ -85,7 +85,7 @@ body {
       word-spacing: initial;
       color: transparent;
       @media (max-width: 400px) {
-        color: #555;
+        color: #888;
       }
     }
 
@@ -244,6 +244,13 @@ body {
         box-shadow: $shadow;
         z-index: 200;
         overflow: auto;
+
+        .row {
+          display: flex;
+          flex-direction: row;
+          gap: $size-md;
+          align-items: center;
+        }
 
         .icon-button {
           width: 32px !important;
