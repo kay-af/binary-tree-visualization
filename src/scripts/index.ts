@@ -1,4 +1,10 @@
-import { Size, TreeNode, TreeParser, TreeParserError } from "./utils";
+import {
+  enableMousePan,
+  Size,
+  TreeNode,
+  TreeParser,
+  TreeParserError,
+} from "./utils";
 
 // Border bottom styles based on tree input.
 const TREE_INPUT_NEUTRAL_BORDER_BOTTOM = "2px solid white";
@@ -135,6 +141,9 @@ export class App {
       "click",
       this.onCloseInfo.bind(this)
     );
+
+    enableMousePan(this.scrollAreaElement);
+
     this.updateState(this.initialTreeInput);
     this.updateUI();
   }
@@ -414,7 +423,7 @@ const appConfig: AppConfig = {
     infoCloseButton: "info-close-button",
     infoCardBody: "info-card-body",
   },
-  initialTreeInput: "",
+  initialTreeInput: "1 2 3 4 5 6 7 8 9 0",
 };
 
 const app = new App(appConfig);
