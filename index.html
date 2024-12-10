@@ -2,163 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
-    <!--Icons-->
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/logo-dark.svg"
-      media="(prefers-color-scheme: light)"
-    />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/logo-light.svg"
-      media="(prefers-color-scheme: dark)"
-    />
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Binary Tree Visualization</title>
-    <script defer type="module" src="./src/scripts/index.ts"></script>
-    <link rel="stylesheet" href="./src/styles.scss" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
+    <meta
+      http-equiv="refresh"
+      content="0; URL=https://projects.freedee.me/binary-tree-visualization"
     />
+    <title>Application moved</title>
   </head>
   <body>
-    <div id="root">
-      <div id="inspector">
-        <label id="tree-input-label" for="tree-input">Tree Input</label>
-        <input id="tree-input" placeholder="Tree input" />
-        <button class="icon-button" id="recenter-button">
-          <i class="fa-solid fa-arrows-to-dot"></i>
-        </button>
-        <button class="icon-button" id="info-button">
-          <i class="fa-solid fa-circle-info"></i>
-        </button>
-      </div>
-      <div id="scene">
-        <div id="scroll-area">
-          <div id="grid"></div>
-        </div>
-        <div id="error-overlay" class="hide">
-          <p id="error-title"></p>
-          <p id="error-message"></p>
-        </div>
-        <div id="info-overlay" class="hide">
-          <div id="info-card">
-            <div id="info-card-heading">
-              <div class="row">
-                <img
-                  src="./src/assets/icon.png"
-                  alt="Application icon"
-                  width="18px"
-                />
-                <p>Binary Tree Visualization</p>
-              </div>
-              <button class="icon-button" id="info-close-button">
-                <i class="fa-solid fa-circle-xmark"></i>
-              </button>
-            </div>
-            <div id="info-card-body">
-              <p class="heading">
-                <b>Tree Input</b>
-              </p>
-              <p>
-                Tree input is a string that represents the structure of the
-                binary tree. It consists of space-separated 32-bit signed
-                integer values and the alphabet 'N' (case-insensitive) indicates
-                a <b>NULL</b> node.
-              </p>
-              <br />
-              <p>
-                The values are essentially the result of level order traversal
-                of the resulting binary tree. To indicate a null node the
-                alphabet 'N' (case-insensitive) is used. Null nodes have no
-                children so they are skipped when rendering the next level
-                (children of the current level) of the binary tree.
-              </p>
-              <br />
-              <p>Some Examples:</p>
-              <br />
-              <div id="examples">
-                <div class="example-stack">
-                  <img
-                    class="example-img"
-                    src="./src/assets/example0.png"
-                    alt="First Example"
-                  />
-                  <p>1 2 3</p>
-                </div>
-                <div class="example-stack">
-                  <img
-                    class="example-img"
-                    src="./src/assets/example1.png"
-                    alt="Second Example"
-                  />
-                  <p>1 N 3</p>
-                </div>
-                <div class="example-stack">
-                  <img
-                    class="example-img"
-                    src="./src/assets/example2.png"
-                    alt="Third Example"
-                  />
-                  <p>1 N 3 4 5</p>
-                </div>
-              </div>
-              <br />
-              <br />
-              <p class="heading">
-                <b>Hover on node</b>
-              </p>
-              <div id="hover-example-container">
-                <p>
-                  Sometimes, the value of a node is too large to fit inside the
-                  node. <b>Hover</b> on any node to expand it and make the full
-                  value visible. In mobile devices, click on a node to expand
-                  it.
-                </p>
-                <img src="./src/assets/hover.gif" alt="Hover preview" />
-              </div>
-              <br />
-              <br />
-              <p class="heading">
-                <i class="fa-solid fa-arrows-to-dot"></i>
-                &nbsp;
-                <b>Recenter Button</b>
-              </p>
-              <p>
-                When the tree is generated, press this button to scroll the view
-                to the root node if lost.
-              </p>
-              <br />
-              <br />
-              <p class="heading">
-                <b>About the project</b>
-              </p>
-              <p>
-                Here is the
-                <a
-                  href="https://github.com/kay-af/binary-tree-visualization"
-                  target="_blank"
-                  rel="noreferer noopener"
-                  class="github-anchor"
-                >
-                  <i class="fa-brands fa-github"></i>
-                </a>
-                repository of the project. If you like my work, please leave a
-                star ⭐️
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <h1>This application has moved</h1>
+    <p>
+      If you are not redirected automatically, follow this
+      <a href="https://projects.freedee.me/binary-tree-visualization">Link</a>
+    </p>
   </body>
 </html>
